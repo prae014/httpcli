@@ -17,3 +17,9 @@ func URLmod(req *http.Request, q_flags []string) (new_url string) {
 
 	return req.URL.String()
 }
+
+// check if string is in json form or not
+func Validjson(s string) (result bool) {
+	input := []byte(s)
+	return true // FIXME:
+}

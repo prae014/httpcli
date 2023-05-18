@@ -14,13 +14,6 @@ var rootCmd = &cobra.Command{
 	Use:   "httpcli",
 	Short: "httpcli is a HTTP client command line program",
 	Long: `httpcli is a HTTP client command line program developed in GO
-	
-	available commands:
-
-	get: send a GET request to a given URL
-	post: send a POST request to a given URL
-	put: send a PUT request to a given URL
-	delete: send a DELETE request to a given URL	
 	`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
