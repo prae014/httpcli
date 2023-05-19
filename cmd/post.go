@@ -25,7 +25,7 @@ var postCmd = &cobra.Command{
 		For example, "httpcli post example.com --query key1=val1 --query key2=value2"
 	-H, --header 	
 		return headers
-		User can specify the key-value pair they want.
+		User can specify the key they want.
 		For example, "httpcli post example.com --header key1=val1 --header key2=value2"	
 	-j, --json
 		Construct JSON body of a request.
@@ -39,13 +39,23 @@ var postCmd = &cobra.Command{
 		//TODO: make http print function (formatting) as a global function so we can print everthing by just calling it
 		//FIXME: header value still has [], need to get rid of itA
 
-		proto, status_code, header, body := pkg.Post(args[0], query_flags)
+		proto, status_code, header, body := pkg.Post(args[0], query_flags, json_flags)
 
 		//if there is no header flag, we return all headers and other data. Otherwise return the specified flags
+		fmt.Printf("args[1] is: %v\n", json_flags)
 		if len(head_flags) == 0 {
 			fmt.Printf("%v %v\n\n", proto, status_code)
 			for key, val := range header {
-				fmt.Printf("%v: %v\n", key, val)
+
+				//fmt.Printf("%v: %v\n", key, val)
+				//test start
+
+				fmt.Printf("%v: ", key)
+				for _, each_val := range val {
+					fmt.Printf("%v", each_val)
+				}
+				fmt.Printf("\n")
+				//test end
 			}
 			fmt.Printf("\n%v\n", string(body))
 		} else {
@@ -71,16 +81,3 @@ func init() {
 	postCmd.Flags().StringVarP(&json_flags, "json", "j", "", "construct json body of the POST request")
 	rootCmd.AddCommand(postCmd)
 }
-
-// modify URL if queries exist
-//func URLmod(req *http.Request, q_flags []string) (new_url string) {
-//	query := req.URL.Query()
-//	for _, flag := range q_flags {
-//		//split flags to ["key", "val"}, using = as a delimiter
-//		split_str := strings.Split(flag, "=")
-//		query.Add(split_str[0], split_str[1])
-//	}
-//	req.URL.RawQuery = query.Encode() // RawQuery (from URL struct) encoded query values, without '?'
-//
-//	return req.URL.String()
-//}

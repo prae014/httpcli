@@ -24,7 +24,7 @@ var getCmd = &cobra.Command{
 		For example, "httpcli get example.com --query key1=val1 --query key2=value2"
 	-H, --header 	
 		return headers
-		User can specify the key-value pair they want.
+		User can specify the key they want.
 		For example, "httpcli get example.com --header key1=val1 --header key2=value2"	
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -40,7 +40,13 @@ var getCmd = &cobra.Command{
 		if len(head_flags) == 0 {
 			fmt.Printf("%v %v\n\n", proto, status_code)
 			for key, val := range header {
-				fmt.Printf("%v: %v\n", key, val)
+				//fmt.Printf("%v: %v\n", key, val)
+
+				fmt.Printf("%v: ", key)
+				for _, each_val := range val {
+					fmt.Printf("%v", each_val)
+				}
+				fmt.Printf("\n")
 			}
 			fmt.Printf("\n%v\n", string(body))
 		} else {
