@@ -45,7 +45,6 @@ func init() {
 
 	//note: StringSliceVarP has a shorthand name, StringSliceP does not have
 	rootCmd.PersistentFlags().StringSliceVarP(&head_flags, "header", "H", []string{}, "return specified header")
-
 	rootCmd.PersistentFlags().StringSliceVarP(&query_flags, "query", "q", []string{}, "return specified query")
 
 }

@@ -13,7 +13,7 @@ import (
 func URLmod(req *http.Request, q_flags []string) (new_url string) {
 	query := req.URL.Query()
 	for _, flag := range q_flags {
-		//split flags to ["key", "val"}, using = as a delimiter
+		//split flags to ["key", "val"}, using "="
 		split_str := strings.Split(flag, "=")
 		query.Add(split_str[0], split_str[1])
 	}
@@ -24,12 +24,11 @@ func URLmod(req *http.Request, q_flags []string) (new_url string) {
 
 // check if string is in json form or not
 func Validjson(s string) (json_fmt []byte) {
-	input := []byte(s) //TODO: have to check if json format we send is []byte???? is this right??
+	input := []byte(s)
 
 	decoder := json.NewDecoder(bytes.NewBuffer(input))
 	for {
 		_, err := decoder.Token()
-		//fmt.Println(i) //FIXME: test 123 is correct???
 		if err == io.EOF {
 			break
 		}

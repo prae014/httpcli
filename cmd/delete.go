@@ -7,7 +7,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// GET
 var deleteCmd = &cobra.Command{
 	Use:   "delete <URL>",
 	Short: "delete sends a DELETE request to a given URL",
@@ -26,11 +25,6 @@ var deleteCmd = &cobra.Command{
 		For example, "httpcli delete example.com --header key1=val1 --header key2=value2"	
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		//for i := 0; i < len(args); i++ {
-		//	fmt.Println(args[i])
-		//}
-		//TODO: make http print function (formatting) as a global function so we can print everthing by just calling it
-		//FIXME: header value still has [], need to get rid of itA
 
 		proto, status_code, header, body := pkg.Delete(args[0], query_flags)
 
@@ -65,7 +59,5 @@ var deleteCmd = &cobra.Command{
 func init() {
 
 	//DELETE
-
-	//getCmd.Flags().StringSliceVarP(&head_flags, "header", "H", []string{}, "return specified header")
 	rootCmd.AddCommand(deleteCmd)
 }

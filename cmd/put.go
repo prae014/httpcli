@@ -7,9 +7,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// GET
-// var head_flags []string
-// var query_flags []string
 var putCmd = &cobra.Command{
 	Use:   "put <URL>",
 	Short: "put sends a PUT request to a given URL",
@@ -29,14 +26,9 @@ var putCmd = &cobra.Command{
 	-j, --json
 		Construct JSON body of a request.
 		This command also validates the JSON input
-		For example, "httpcli put exmaple.com --json "{'key': 'value'}"
+		For example, "httpcli put exmaple.com --json '{"key": "value"}'
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		//for i := 0; i < len(args); i++ {
-		//	fmt.Println(args[i])
-		//}
-		//TODO: make http print function (formatting) as a global function so we can print everthing by just calling it
-		//FIXME: header value still has [], need to get rid of itA
 
 		proto, status_code, header, body := pkg.Put(args[0], query_flags, json_flags)
 
@@ -74,9 +66,8 @@ var putCmd = &cobra.Command{
 
 func init() {
 
-	//GET
+	//PUT
 
-	//getCmd.Flags().StringSliceVarP(&head_flags, "header", "H", []string{}, "return specified header")
 	putCmd.Flags().StringVarP(&json_flags, "json", "j", "", "construct json body of the PUT request")
 	rootCmd.AddCommand(putCmd)
 }

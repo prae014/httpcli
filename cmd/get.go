@@ -28,11 +28,6 @@ var getCmd = &cobra.Command{
 		For example, "httpcli get example.com --header key1=val1 --header key2=value2"	
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		//for i := 0; i < len(args); i++ {
-		//	fmt.Println(args[i])
-		//}
-		//TODO: make http print function (formatting) as a global function so we can print everthing by just calling it
-		//FIXME: header value still has [], need to get rid of itA
 
 		proto, status_code, header, body := pkg.Get(args[0], query_flags)
 
@@ -67,20 +62,5 @@ var getCmd = &cobra.Command{
 func init() {
 
 	//GET
-
-	//getCmd.Flags().StringSliceVarP(&head_flags, "header", "H", []string{}, "return specified header")
 	rootCmd.AddCommand(getCmd)
 }
-
-// modify URL if queries exist
-//func URLmod(req *http.Request, q_flags []string) (new_url string) {
-//	query := req.URL.Query()
-//	for _, flag := range q_flags {
-//		//split flags to ["key", "val"}, using = as a delimiter
-//		split_str := strings.Split(flag, "=")
-//		query.Add(split_str[0], split_str[1])
-//	}
-//	req.URL.RawQuery = query.Encode() // RawQuery (from URL struct) encoded query values, without '?'
-//
-//	return req.URL.String()
-//}
