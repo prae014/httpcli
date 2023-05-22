@@ -26,7 +26,7 @@ var putCmd = &cobra.Command{
 	-j, --json
 		Construct JSON body of a request.
 		This command also validates the JSON input
-		For example, "httpcli put exmaple.com --json '{"key": "value"}'
+		For example, "httpcli put example.com --json '{"key": "value"}'
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
 
