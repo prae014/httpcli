@@ -34,7 +34,9 @@ func Validjson(s string) (json_fmt []byte) {
 		}
 		if err != nil {
 			fmt.Println("invalid input: input is not in JSON format")
-			panic(err)
+			panic(err) // in case of validating a user input, we don't use the panic() function
+			// instead we should return it to outside and let caller handle it
+			// panic() is used only if it want to throw an error from developers
 		}
 	}
 	return input
